@@ -1,0 +1,12 @@
+{
+    "buildCommand": "pnpm build",
+    "outputDirectory": ".svelte-kit/output/client",
+    "framework": "sveltekit",
+    "rewrites": [
+    { "source": "/api/:path(.*)", "destination": "https://dreamstayhotel.runasp.net/api/:path" },
+    {
+    "source": "/(.*)",
+    "destination": "/index.html"
+    }
+]
+}
