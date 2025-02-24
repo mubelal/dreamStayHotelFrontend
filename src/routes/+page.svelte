@@ -16,7 +16,7 @@
 	}
 
 	let adults = $state([{ id: 1, name: '', dateOfBirth: '', identityCard: '', bookingId: 0 }]);
-	let children = $state([{ id: 1, name: '', dateOfBirth: '', identityCard: '', bookingId: 0 }]);
+	let children = $state([]);
 	function addAdult() {
 		const id = adults.length + 1;
 		adults = [...adults, { id, name: '', dateOfBirth: '', identityCard: '', bookingId: 0 }];
