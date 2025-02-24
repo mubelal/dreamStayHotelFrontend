@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Alap stílusok */
+body {
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* A linkre vonatkozó fókusz eltávolítása */
+.nav-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 60vh;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Szobakártyák stílusai */
+#roomList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#roomList .col-md-6 {
+  display: flex;
+}
+
+.room-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* A kártya magassága 100%-ban kitölti a szülő elemét */
+  transition: transform 0.3s ease-in-out;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+}
+
+.room-card .card-body {
+  flex-grow: 1; /* A tartalom kitölti a rendelkezésre álló helyet */
+}
+
+.room-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  color: #007bff !important;
+}
+
+#customAlert {
+  position: fixed;
+  top: 4rem;
+  right: 20px;
+  z-index: 1050;
+}
+
+html {
+  scroll-padding-top: 70px; /* A navbar magasságának megfelelően állítsd be */
+}
+
+body {
+  padding-top: 56px; /* A navbar magasságának megfelelően állítsd be */
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.review-slider {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.review-card {
+  flex: 0 0 100%;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+}
+
+.review-card h5 {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.review-card p {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+}
+
+.review-author img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.review-author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-author-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.review-author-location {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.review-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+.review-nav.prev {
+  left: 10px;
+}
+
+.review-nav.next {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .review-nav {
+    display: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+#about {
+  padding: 20px;
+  background-color: #212529;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* Új lábléc stílusok */
+.footer {
+  background-color: #24262b;
+  padding: 45px 0;
+}
+
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: #e91e63;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+/* Reszponzív stílusok */
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
