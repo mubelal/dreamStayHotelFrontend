@@ -1,5 +1,14 @@
 <script>
 	import { userGroup } from '$lib/store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	onMount(() => {
+		if($userGroup !== "Admin"){
+			goto("/")
+			return
+		}
+	})
 
 	let selectedUser = $state(null);
 	let users = $state([]);
