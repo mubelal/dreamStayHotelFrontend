@@ -33,7 +33,7 @@
 	}
 
 	async function handleBooking() {
-		if ((!checkIn.value && !checkOut.value) || adults.length === 0 || children.length === 0) {
+		if ((!checkIn.value && !checkOut.value) || adults.length === 0) {
 			setTimeout(() => {
 				showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
 			}, 450);
