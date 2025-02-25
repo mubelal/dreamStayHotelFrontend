@@ -33,7 +33,7 @@
 	}
 
 	async function handleBooking() {
-		if ((!checkIn.value && !checkOut.value) || adults.length === 0) {
+		if ((!checkIn.value && !checkOut.value) || !adult_name_1.value || !adult_dob_1.value || !adult_idcard_1.value || adults.length === 0) {
 			setTimeout(() => {
 				showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
 			}, 450);
@@ -54,6 +54,10 @@
 				children
 			})
 		});
+
+		const data = await res.json()
+		console.log(data);
+
 		if (res.ok) {
 			const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
 			bookingModal.hide();
@@ -65,7 +69,7 @@
 			return;
 		}
 		setTimeout(() => {
-			showAlert('Kérem jelentkezzen be a foglaláshoz.', 'warning');
+			showAlert(data, 'warning');
 		}, 450);
 	}
 
@@ -791,11 +795,11 @@
 					<div class="row g-2">
 						<div class="col">
 							<label>Érkezés</label>
-							<input type="date" id="checkIn" class="form-control" />
+							<input required type="date" id="checkIn" class="form-control" />
 						</div>
 						<div class="col">
 							<label>Távozás</label>
-							<input type="date" id="checkOut" class="form-control" />
+							<input required type="date" id="checkOut" class="form-control" />
 						</div>
 					</div>
 					<h6 class="fw-bold mt-3">Felnőttek</h6>
@@ -809,25 +813,28 @@
 								>
 							</div>
 							<div class="card-body">
-								<label for="adult-name-{adult.id}">Név</label>
+								<label for="adult_name_{adult.id}">Név</label>
 								<input
-									id="adult-name-{adult.id}"
+									required
+									id="adult_name_{adult.id}"
 									bind:value={adult.name}
 									class="form-control mb-1"
 								/>
 
-								<label for="adult-dob-{adult.id}">Születési idő</label>
+								<label for="adult_dob_{adult.id}">Születési idő</label>
 								<input
+									required
 									type="date"
-									id="adult-dob-{adult.id}"
+									id="adult_dob_{adult.id}"
 									bind:value={adult.dateOfBirth}
 									class="form-control mb-1"
 								/>
 
 								<label for="adult-idcard-{adult.id}">Személyigazolvány</label>
 								<input
+									required
 									type="text"
-									id="adult-idcard-{adult.id}"
+									id="adult_idcard_{adult.id}"
 									bind:value={adult.identityCard}
 									class="form-control mb-1"
 								/>
