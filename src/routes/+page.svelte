@@ -288,9 +288,7 @@
 </script>
 
 <div style="padding-top: 56px;">
-	<div class="container mt-4">
-		<div id="customAlert" class="alert d-none" role="alert"></div>
-	</div>
+
 
 	<header>
 		<div
@@ -377,26 +375,26 @@
 			<h2 class="mb-4">Szobáink</h2>
 			<div class="row" id="roomList">
 				{#each rooms as room}
-					<div class="col-md-6 col-lg-4 mb-4">
-						<div class="card room-card">
-							<img src={room.img_Src} class="card-img-top room-image" alt="${room.name}" />
-							<div class="card-body">
-								<h5 class="card-title">{room.name}</h5>
-								<p class="card-text">{room.description}</p>
-								<p class="card-text"><strong>Ár:</strong> {room.pricePerNight} HUF / éjszaka</p>
-								<p class="card-text">
-									<strong>Max. létszám:</strong>
-									{room.maxAdults + room.maxChildren}
-								</p>
-								<button
-									class="btn btn-dark book-btn"
+				<div class="col-md-6 col-lg-4 mb-4">
+					<div class="card room-card h-100 d-flex flex-column">
+						<img src={room.img_Src} class="card-img-top room-image" alt="${room.name}" />
+						<div class="card-body d-flex flex-column flex-grow-1">
+							<h5 class="card-title">{room.name}</h5>
+							<p class="card-text">{room.description}</p>
+							<p class="card-text"><strong>Ár:</strong> {room.pricePerNight} HUF / éjszaka</p>
+							<p class="card-text">
+								<strong>Max. létszám:</strong>
+								{room.maxAdults + room.maxChildren}
+							</p>
+							<div class="mt-auto">
+								<button class="btn btn-dark book-btn w-100"
 									data-bs-toggle="modal"
 									data-bs-target="#bookingModal"
-									onclick={() => openBooking(room.id)}>Foglalás</button
-								>
+									onclick={() => openBooking(room.id)}>Foglalás</button>
 							</div>
 						</div>
 					</div>
+				</div>
 				{/each}
 			</div>
 		</section>
@@ -891,6 +889,10 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="container mt-5">
+	<div id="customAlert" class="alert d-none" role="alert"></div>
 </div>
 
 <style>
