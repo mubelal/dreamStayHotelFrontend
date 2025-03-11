@@ -18,7 +18,13 @@
 	<header>
 		<Navbar />
 	</header>
+
+	
 	<main>
+		<div class="container mt-5">
+			<div id="customAlert" class="alert d-none position-fixed top-5 start-50 translate-middle-x" style="z-index: 9999; margin-top: 20px;"></div>
+		</div>
+	
 		{@render children()}
 	</main>
 </div>

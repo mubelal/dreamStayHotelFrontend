@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { bookings, isLoggedIn, userGroup } from '$lib/store';
+	import { Menu } from 'lucide-svelte';
 
 	// async function handleGetBookings() {
 	// 	let res = await fetch('/api/Booking/bookings', {
@@ -87,27 +88,6 @@
     height: 24px; /* Méretezés */
 }
 
-.navbar-custom .navbar-toggler-icon::before,
-.navbar-custom .navbar-toggler-icon::after {
-    content: "";
-    display: block;
-    width: 30px;
-    height: 3px;
-    background-color: white;  /* Fehér csíkok */
-    position: absolute;
-    left: 0;
-    transition: all 0.3s;
-}
-
-.navbar-custom .navbar-toggler-icon::before {
-    top: 0; /* Az első csík a tetejére kerül */
-}
-
-.navbar-custom .navbar-toggler-icon::after {
-    bottom: 0; /* Az utolsó csík az aljára */
-}
-
-
 .navbar-custom .nav-link:hover {
     color: #ddd;  /* Fehérnél világosabb szín, amikor rávisszük az egeret */
 }
@@ -125,7 +105,7 @@
 			aria-expanded="false"
 			aria-label="Toggle navigation"
 		>
-			<span class="navbar-toggler-icon"></span>
+			<span class="navbar-toggler-icon d-flex align-items-center"><Menu color="white" strokeWidth={3} size=32 /></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav me-auto">

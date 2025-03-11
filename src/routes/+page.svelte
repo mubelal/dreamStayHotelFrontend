@@ -3,7 +3,7 @@
 	import img6 from '$lib/images/6.png';
 	import img7 from '$lib/images/7.png';
 	import img8 from '$lib/images/8.png';
-	import { bookings } from '$lib/store';
+	import { bookings, isLoggedIn } from '$lib/store';
 	import { onMount } from 'svelte';
 	import { Swiper } from 'swiper';
 	let currentRoom = $state();
@@ -33,11 +33,36 @@
 	}
 
 	async function handleBooking() {
-		if ((!checkIn.value && !checkOut.value) || !adult_name_1.value || !adult_dob_1.value || !adult_idcard_1.value || adults.length === 0) {
-			setTimeout(() => {
-				showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
-			}, 450);
+		console.log("asd");
+		
+		if ((!checkIn.value && !checkOut.value) || adults.length === 0) {
+			showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
 			return;
+		}
+
+		const idCardRegex = /^[0-9]{6}[A-Z]{2}$/;
+		for (let adult of adults) {
+			if (!adult.name && !adult.dateOfBirth && !adult.identityCard) {
+				showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
+				return;
+			}
+
+			if (!idCardRegex.test(adult.identityCard)) {
+				showAlert('A személyi igazolvány formátuma nem megfelelő. A helyes formátum: 6 szám és 2 nagybetű.', 'warning', 5);
+				return;
+			}
+		}
+
+		for (let child of children) {
+			if (!child.name && !child.dateOfBirth && !child.identityCard) {
+				showAlert('Foglaláshoz töltse ki az adatokat.', 'warning');
+				return;
+			}
+
+			if (!idCardRegex.test(child?.identityCard)) {
+				showAlert('A személyi igazolvány formátuma nem megfelelő. A helyes formátum: 6 szám és 2 nagybetű.', 'warning', 5);
+				return;
+			}
 		}
 
 		const res = await fetch('/api/Booking/booking', {
@@ -56,21 +81,19 @@
 		});
 
 		const data = await res.json()
-		console.log(data);
-
 		if (res.ok) {
 			const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
 			bookingModal.hide();
 			checkIn.value = '';
 			checkOut.value = '';
-			setTimeout(() => {
-				showAlert('Foglalása sikeresen megtörtént.', 'success');
-			}, 450);
-			return;
-		}
-		setTimeout(() => {
+			adults = [{ id: 1, name: '', dateOfBirth: '', identityCard: '', bookingId: 0 }]
+			children = []
+			showAlert('Foglalása sikeresen megtörtént.', 'success');
+		} else {
 			showAlert(data, 'warning');
-		}, 450);
+			console.log(data);
+			
+		}
 	}
 
 	async function handleBookingRemove(e) {
@@ -81,9 +104,8 @@
 				Authorization: `Bearer ${localStorage.getItem('AuthToken')}`
 			}
 		});
-		setTimeout(() => {
-			showAlert('Foglalása sikeresen törölve lett.', 'success');
-		}, 450);
+		
+		showAlert('Foglalása sikeresen törölve lett.', 'success');
 
 		let res = await fetch('/api/Booking/user-with-bookings', {
 			method: 'GET',
@@ -133,15 +155,17 @@
 		rooms = data.$values;
 	}
 
-	function showAlert(message, type) {
-		const alertElement = document.getElementById('customAlert');
-		alertElement.className = `alert alert-${type}`;
-		alertElement.textContent = message;
-		alertElement.classList.remove('d-none');
-
+	function showAlert(message, type, length = 2) {
 		setTimeout(() => {
-			alertElement.classList.add('d-none');
-		}, 2000);
+			const alertElement = document.getElementById('customAlert');
+			alertElement.className = `alert alert-${type}`;
+			alertElement.textContent = message;
+			alertElement.classList.remove('d-none');
+
+			setTimeout(() => {
+				alertElement.classList.add('d-none');
+			}, length*1000);
+		}, 450)
 	}
 
 	let rooms = $state([]);
@@ -192,9 +216,7 @@
 
 	async function handleRegister() {
 		if (registerPassword.value !== registerConfirmPassword.value) {
-			setTimeout(() => {
-				showAlert('Két jelszó nem egyezik meg.', 'warning');
-			}, 450);
+			showAlert('Két jelszó nem egyezik meg.', 'warning');
 			return;
 		}
 
@@ -215,14 +237,10 @@
 		if (res.ok) {
 			const registerModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
 			registerModal.hide();
-			setTimeout(() => {
 				showAlert('Sikeres regisztráció.', 'success');
-			}, 450);
 			return;
 		}
-		setTimeout(() => {
-			showAlert('Sikertelen regisztráció.', 'danger');
-		}, 450);
+		showAlert('Sikertelen regisztráció.', 'danger');
 	}
 
 	async function handleLogin() {
@@ -884,19 +902,26 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-					<button class="btn btn-sm btn-outline-success" onclick={handleBooking}>Foglalás</button>
+					<button class="btn btn-sm btn-outline-success" onclick={handleBooking} disabled={!$isLoggedIn} title="{!$isLoggedIn ? "Jelentkezzen be a foglaláshoz" : null}">Foglalás</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container mt-5">
-	<div id="customAlert" class="alert d-none" role="alert"></div>
-</div>
-
 <style>
 	.card {
 		width: 100%;
+	}
+
+	button:disabled {
+		pointer-events: auto;
+	}
+	button:disabled:hover {
+		cursor: default;
+	}
+	button:disabled:active {
+		background: white;
+		color: green;
 	}
 </style>
