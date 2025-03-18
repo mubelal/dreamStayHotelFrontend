@@ -915,6 +915,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
 					<button
+						id="foglalasButton"
 						class="btn btn-sm btn-outline-success"
 						onclick={handleBooking}
 						disabled={!$isLoggedIn}
