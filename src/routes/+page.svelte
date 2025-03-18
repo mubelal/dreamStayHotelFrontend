@@ -869,7 +869,7 @@
 							</div>
 						</div>
 					{/each}
-					<button class="btn btn-sm btn-outline-primary" onclick={addAdult}
+					<button id="felnottAddButton" class="btn btn-sm btn-outline-primary" onclick={addAdult}
 						>+ Felnőtt hozzáadása</button
 					>
 					<h6 class="fw-bold mt-3">Gyermekek</h6>
@@ -908,7 +908,7 @@
 							</div>
 						</div>
 					{/each}
-					<button class="btn btn-sm btn-outline-primary" onclick={addChild}
+					<button id="gyermekAddButton" class="btn btn-sm btn-outline-primary" onclick={addChild}
 						>+ Gyermek hozzáadása</button
 					>
 				</div>
