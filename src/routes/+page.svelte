@@ -411,6 +411,7 @@
 								</p>
 								<div class="mt-auto">
 									<button
+										id="foglalasGomb"
 										class="btn btn-dark book-btn w-100"
 										data-bs-toggle="modal"
 										data-bs-target="#bookingModal"
